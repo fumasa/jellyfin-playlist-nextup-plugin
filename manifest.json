@@ -1,7 +1,7 @@
 [
   {
     "guid": "F5C1F45C-6F5A-4B25-8B1F-4D5C60D9A2C6",
-    "name": "Playlist/Collection Next Up",
+    "name": "Playlist Collection Next Up",
     "overview": "Resume/NextUp-like behavior for mixed playlists and collections.",
     "description": "Tracks playback progress for playlists and collections and exposes a resume feed.",
     "owner": "fumasa",
