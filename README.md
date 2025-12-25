@@ -77,4 +77,4 @@ Release assets:
 
 ## License
 
-MPL-2.0 (same spirit as Jellyfin plugins — adjust if you prefer).
+MIT.
