@@ -36,8 +36,8 @@ jobs:
           VERSION="${GITHUB_REF_NAME#v}"
           mkdir -p dist/Jellyfin.Plugin.PlaylistNextUp
           cp Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/* dist/Jellyfin.Plugin.PlaylistNextUp/
-          (cd dist && zip -r Jellyfin.Plugin.PlaylistNextUp.zip Jellyfin.Plugin.PlaylistNextUp)
-          (cd web && zip -r ../dist/playlistnextup-web.zip playlistnextup)
+          (cd dist && zip -r Jellyfin.Plugin.PlaylistNextUp_v${VERSION}.zip Jellyfin.Plugin.PlaylistNextUp)
+          (cd web && zip -r ../dist/playlistnextup-web_v${VERSION}.zip playlistnextup)
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - name: Checkout main for manifest update
@@ -59,12 +59,12 @@ jobs:
           version = os.environ["VERSION"]
           tag = f"v{version}"
           repo = os.environ["GITHUB_REPOSITORY"]
-          zip_path = "dist/Jellyfin.Plugin.PlaylistNextUp.zip"
+          zip_path = f"dist/Jellyfin.Plugin.PlaylistNextUp_v{version}.zip"
 
           with open(zip_path, "rb") as f:
             checksum = hashlib.md5(f.read()).hexdigest().upper()
 
-          source_url = f"https://github.com/{repo}/releases/download/{tag}/Jellyfin.Plugin.PlaylistNextUp.zip"
+          source_url = f"https://raw.githubusercontent.com/{repo}/gh-pages/downloads/Jellyfin.Plugin.PlaylistNextUp_v{version}.zip"
           changelog = f"https://github.com/{repo}/releases/tag/{tag}"
           timestamp = datetime.datetime.utcnow().date().isoformat()
 
@@ -106,9 +106,31 @@ jobs:
           git commit -m "Update manifest for ${GITHUB_REF_NAME}"
           git push origin HEAD:main
 
+      - name: Publish downloads (gh-pages)
+        run: |
+          set -euo pipefail
+          git fetch origin gh-pages || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf . || true
+          fi
+          mkdir -p downloads
+          cp dist/Jellyfin.Plugin.PlaylistNextUp_v${VERSION}.zip downloads/
+          cp dist/playlistnextup-web_v${VERSION}.zip downloads/
+          git add downloads
+          if git diff --cached --quiet; then
+            echo "No download changes to commit."
+          else
+            git commit -m "Publish downloads for v${VERSION}"
+            git push origin gh-pages
+          fi
+          git checkout main
+
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/Jellyfin.Plugin.PlaylistNextUp.zip
-            dist/playlistnextup-web.zip
+            dist/Jellyfin.Plugin.PlaylistNextUp_v${{ env.VERSION }}.zip
+            dist/playlistnextup-web_v${{ env.VERSION }}.zip
