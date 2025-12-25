@@ -34,9 +34,9 @@ jobs:
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
-          mkdir -p dist/Jellyfin.Plugin.PlaylistNextUp
-          cp Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/* dist/Jellyfin.Plugin.PlaylistNextUp/
-          (cd dist && zip -r Jellyfin.Plugin.PlaylistNextUp_v${VERSION}.zip Jellyfin.Plugin.PlaylistNextUp)
+          mkdir -p dist/package
+          cp Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/* dist/package/
+          (cd dist/package && zip -r ../Jellyfin.Plugin.PlaylistNextUp_v${VERSION}.zip .)
           (cd web && zip -r ../dist/playlistnextup-web_v${VERSION}.zip playlistnextup)
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
