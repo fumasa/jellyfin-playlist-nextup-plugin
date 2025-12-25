@@ -75,6 +75,6 @@ Release assets:
 - Server plugin zip: `Jellyfin.Plugin.PlaylistNextUp.zip`
 - Web plugin zip: `playlistnextup-web.zip`
 
-## License
+## Licensehttps://github.com/fumasa/jellyfin-playlist-nextup-plugin/blob/main/manifest.json
 
 MIT.

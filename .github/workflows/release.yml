@@ -55,11 +55,11 @@ jobs:
           zip_path = "dist/Jellyfin.Plugin.PlaylistNextUp.zip"
 
           with open(zip_path, "rb") as f:
-            checksum = hashlib.sha256(f.read()).hexdigest()
+            checksum = hashlib.md5(f.read()).hexdigest().upper()
 
           source_url = f"https://github.com/{repo}/releases/download/{tag}/Jellyfin.Plugin.PlaylistNextUp.zip"
           changelog = f"https://github.com/{repo}/releases/tag/{tag}"
-          timestamp = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+          timestamp = datetime.datetime.utcnow().date().isoformat()
 
           with open("manifest.json", "r", encoding="utf-8") as f:
             manifest = json.load(f)
@@ -74,7 +74,7 @@ jobs:
           versions.insert(0, {
             "version": f"{version}.0",
             "changelog": changelog,
-            "targetAbi": "10.10.0.0",
+            "targetAbi": "10.10.0",
             "sourceUrl": source_url,
             "checksum": checksum,
             "timestamp": timestamp
