@@ -5,28 +5,36 @@
     <title>Playlist Collection Next Up</title>
 </head>
 <body>
-    <div class="content-primary">
-        <h2>Playlist Collection Next Up</h2>
+    <div id="PlaylistNextUpConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <h2>Playlist Collection Next Up</h2>
 
         <p>
             This plugin tracks playback progress and exposes a "Resume" feed for mixed playlists and collections.
         </p>
 
-        <form id="PlaylistNextUpConfigForm">
-            <div class="inputContainer">
-                <label class="inputLabel" for="Enabled">Enabled</label>
-                <input type="checkbox" id="Enabled" is="emby-checkbox" />
-            </div>
+                <form id="PlaylistNextUpConfigForm">
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input type="checkbox" id="Enabled" is="emby-checkbox" />
+                            <span>Enabled</span>
+                        </label>
+                    </div>
 
-            <div class="inputContainer">
-                <label class="inputLabel" for="TrackPlaylists">Track Playlists</label>
-                <input type="checkbox" id="TrackPlaylists" is="emby-checkbox" />
-            </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input type="checkbox" id="TrackPlaylists" is="emby-checkbox" />
+                            <span>Track Playlists</span>
+                        </label>
+                    </div>
 
-            <div class="inputContainer">
-                <label class="inputLabel" for="TrackCollections">Track Collections</label>
-                <input type="checkbox" id="TrackCollections" is="emby-checkbox" />
-            </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input type="checkbox" id="TrackCollections" is="emby-checkbox" />
+                            <span>Track Collections</span>
+                        </label>
+                    </div>
 
             <div class="inputContainer">
                 <label class="inputLabel" for="ResumeThresholdSeconds">Resume threshold (seconds)</label>
@@ -55,18 +63,20 @@
                 <input type="checkbox" id="DebugLogging" is="emby-checkbox" />
             </div>
 
-            <button is="emby-button" type="submit" class="raised button-submit block">
-                Save
-            </button>
-        </form>
-    </div>
+                    <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                        <span>Save</span>
+                    </button>
+                </form>
+            </div>
+        </div>
 
     <script type="text/javascript">
         (function () {
             var pluginId = "f5c1f45c-6f5a-4b25-8b1f-4d5c60d9a2c6";
 
             function loadConfig() {
-                Dashboard.getPluginConfiguration(pluginId).then(function (config) {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(pluginId).then(function (config) {
                     document.querySelector('#Enabled').checked = config.Enabled;
                     document.querySelector('#TrackPlaylists').checked = config.TrackPlaylists;
                     document.querySelector('#TrackCollections').checked = config.TrackCollections;
@@ -74,13 +84,19 @@
                     document.querySelector('#CompletedPercent').value = config.CompletedPercent;
                     document.querySelector('#CollectionOrdering').value = config.CollectionOrdering;
                     document.querySelector('#DebugLogging').checked = config.DebugLogging;
+                    Dashboard.hideLoadingMsg();
                 });
             }
 
+            document.querySelector('#PlaylistNextUpConfigPage').addEventListener('pageshow', function () {
+                loadConfig();
+            });
+
             document.querySelector('#PlaylistNextUpConfigForm').addEventListener('submit', function (e) {
                 e.preventDefault();
+                Dashboard.showLoadingMsg();
 
-                Dashboard.getPluginConfiguration(pluginId).then(function (config) {
+                ApiClient.getPluginConfiguration(pluginId).then(function (config) {
                     config.Enabled = document.querySelector('#Enabled').checked;
                     config.TrackPlaylists = document.querySelector('#TrackPlaylists').checked;
                     config.TrackCollections = document.querySelector('#TrackCollections').checked;
@@ -89,14 +105,13 @@
                     config.CollectionOrdering = parseInt(document.querySelector('#CollectionOrdering').value || "0", 10);
                     config.DebugLogging = document.querySelector('#DebugLogging').checked;
 
-                    Dashboard.updatePluginConfiguration(pluginId, config).then(function () {
-                        Dashboard.processPluginConfigurationUpdateResult();
+                    ApiClient.updatePluginConfiguration(pluginId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
                     });
                 });
             });
-
-            loadConfig();
         })();
     </script>
+    </div>
 </body>
 </html>
