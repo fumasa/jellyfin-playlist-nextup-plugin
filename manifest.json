@@ -12,7 +12,7 @@
         "version": "0.1.6.0",
         "changelog": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/tag/v0.1.6",
         "targetAbi": "10.10.0",
-        "sourceUrl": "https://raw.githubusercontent.com/fumasa/jellyfin-playlist-nextup-plugin/gh-pages/downloads/Jellyfin.Plugin.PlaylistNextUp_v0.1.6.zip",
+        "sourceUrl": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/download/v0.1.6/Jellyfin.Plugin.PlaylistNextUp_v0.1.6.zip",
         "checksum": "33D835EEDAF636032BD36FC94A9A56FD",
         "timestamp": "2025-12-25"
       },
@@ -20,7 +20,7 @@
         "version": "0.1.5.0",
         "changelog": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/tag/v0.1.5",
         "targetAbi": "10.10.0",
-        "sourceUrl": "https://raw.githubusercontent.com/fumasa/jellyfin-playlist-nextup-plugin/gh-pages/downloads/Jellyfin.Plugin.PlaylistNextUp_v0.1.5.zip",
+        "sourceUrl": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/download/v0.1.5/Jellyfin.Plugin.PlaylistNextUp_v0.1.5.zip",
         "checksum": "248FA1A5F689FC78D28579EE872F711F",
         "timestamp": "2025-12-25"
       },
@@ -28,7 +28,7 @@
         "version": "0.1.4.0",
         "changelog": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/tag/v0.1.4",
         "targetAbi": "10.10.0",
-        "sourceUrl": "https://raw.githubusercontent.com/fumasa/jellyfin-playlist-nextup-plugin/gh-pages/downloads/Jellyfin.Plugin.PlaylistNextUp_v0.1.4.zip",
+        "sourceUrl": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/download/v0.1.4/Jellyfin.Plugin.PlaylistNextUp_v0.1.4.zip",
         "checksum": "FB3647F9C7A97AF484829485D325B218",
         "timestamp": "2025-12-25"
       }
