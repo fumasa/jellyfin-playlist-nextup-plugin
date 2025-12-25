@@ -40,6 +40,13 @@ jobs:
           (cd web && zip -r ../dist/playlistnextup-web.zip playlistnextup)
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
+      - name: Checkout main for manifest update
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout main
+          git pull --rebase origin main
+
       - name: Update manifest
         run: |
           set -euo pipefail
