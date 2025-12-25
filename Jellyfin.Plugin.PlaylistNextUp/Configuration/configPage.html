@@ -58,10 +58,12 @@
                 </select>
             </div>
 
-            <div class="inputContainer">
-                <label class="inputLabel" for="DebugLogging">Debug logging</label>
-                <input type="checkbox" id="DebugLogging" is="emby-checkbox" />
-            </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input type="checkbox" id="DebugLogging" is="emby-checkbox" />
+                            <span>Debug logging</span>
+                        </label>
+                    </div>
 
                     <button is="emby-button" type="submit" class="raised button-submit block emby-button">
                         <span>Save</span>
