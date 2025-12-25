@@ -29,7 +29,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     /// <summary>
     /// Gets the plugin display name.
     /// </summary>
-    public override string Name => "Playlist/Collection Next Up";
+    public override string Name => "Playlist Collection Next Up";
 
     /// <summary>
     /// Gets the plugin unique identifier.

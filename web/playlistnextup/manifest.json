@@ -1,6 +1,6 @@
 {
   "id": "playlistnextup",
-  "name": "Playlist/Collection Next Up",
+  "name": "Playlist Collection Next Up",
   "version": "0.1.0",
   "description": "Adds a Continue playlists/collections row to Jellyfin Web.",
   "target": "jellyfin-web",

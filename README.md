@@ -1,4 +1,4 @@
-# Playlist/Collection Next Up (Jellyfin plugin) — scaffold
+# Playlist Collection Next Up (Jellyfin plugin) — scaffold
 
 **Goal (v1):** Make *mixed* Playlists and Collections behave like a “series-like continue item” by tracking playback progress and exposing a **Resume** entry that clients can use (Web UI, custom JS, home-sections, etc.).
 
@@ -32,7 +32,7 @@ Install:
 
 ## Configuration
 
-Dashboard → Plugins → Playlist/Collection Next Up
+Dashboard → Plugins → Playlist Collection Next Up
 
 Options:
 - Enable plugin
