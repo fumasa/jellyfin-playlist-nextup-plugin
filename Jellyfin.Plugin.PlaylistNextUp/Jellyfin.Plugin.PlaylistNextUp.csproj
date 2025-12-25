@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+    <AssemblyName>Jellyfin.Plugin.PlaylistNextUp</AssemblyName>
+    <RootNamespace>Jellyfin.Plugin.PlaylistNextUp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Jellyfin plugin references -->
+    <PackageReference Include="Jellyfin.Controller" Version="10.10.*" />
+    <PackageReference Include="Jellyfin.Model" Version="10.10.*" />
+    <PackageReference Include="Jellyfin.Common" Version="10.10.*" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\configPage.html" />
+    <None Remove="Configuration\configPage.html" />
+  </ItemGroup>
+
+</Project>

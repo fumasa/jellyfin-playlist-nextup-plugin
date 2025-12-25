@@ -1,0 +1,107 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: |
+          VERSION_NUM="${GITHUB_REF_NAME#v}"
+          dotnet build -c Release -p:Version=${VERSION_NUM}.0
+
+      - name: Package
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME#v}"
+          mkdir -p dist/Jellyfin.Plugin.PlaylistNextUp
+          cp Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/* dist/Jellyfin.Plugin.PlaylistNextUp/
+          (cd dist && zip -r Jellyfin.Plugin.PlaylistNextUp.zip Jellyfin.Plugin.PlaylistNextUp)
+          (cd web && zip -r ../dist/playlistnextup-web.zip playlistnextup)
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Update manifest
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import datetime
+          import hashlib
+
+          version = os.environ["VERSION"]
+          tag = f"v{version}"
+          repo = os.environ["GITHUB_REPOSITORY"]
+          zip_path = "dist/Jellyfin.Plugin.PlaylistNextUp.zip"
+
+          with open(zip_path, "rb") as f:
+            checksum = hashlib.sha256(f.read()).hexdigest()
+
+          source_url = f"https://github.com/{repo}/releases/download/{tag}/Jellyfin.Plugin.PlaylistNextUp.zip"
+          changelog = f"https://github.com/{repo}/releases/tag/{tag}"
+          timestamp = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+
+          with open("manifest.json", "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+
+          guid = "f5c1f45c-6f5a-4b25-8b1f-4d5c60d9a2c6"
+          plugin = next((p for p in manifest if p.get("guid") == guid), None)
+          if plugin is None:
+            raise SystemExit("Plugin GUID not found in manifest.json")
+
+          versions = plugin.get("versions", [])
+          versions = [v for v in versions if v.get("version") != f"{version}.0"]
+          versions.insert(0, {
+            "version": f"{version}.0",
+            "changelog": changelog,
+            "targetAbi": "10.10.0.0",
+            "sourceUrl": source_url,
+            "checksum": checksum,
+            "timestamp": timestamp
+          })
+          plugin["versions"] = versions
+
+          with open("manifest.json", "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2)
+            f.write("\n")
+          PY
+
+      - name: Commit manifest
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          if git diff --cached --quiet; then
+            echo "No manifest changes to commit."
+            exit 0
+          fi
+          git commit -m "Update manifest for ${GITHUB_REF_NAME}"
+          git push origin HEAD:main
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Jellyfin.Plugin.PlaylistNextUp.zip
+            dist/playlistnextup-web.zip

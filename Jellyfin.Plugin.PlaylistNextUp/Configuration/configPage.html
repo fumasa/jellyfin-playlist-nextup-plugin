@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Playlist/Collection Next Up</title>
+</head>
+<body>
+    <div class="content-primary">
+        <h2>Playlist/Collection Next Up</h2>
+
+        <p>
+            This plugin tracks playback progress and exposes a "Resume" feed for mixed playlists and collections.
+        </p>
+
+        <form id="PlaylistNextUpConfigForm">
+            <div class="inputContainer">
+                <label class="inputLabel" for="Enabled">Enabled</label>
+                <input type="checkbox" id="Enabled" is="emby-checkbox" />
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="TrackPlaylists">Track Playlists</label>
+                <input type="checkbox" id="TrackPlaylists" is="emby-checkbox" />
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="TrackCollections">Track Collections</label>
+                <input type="checkbox" id="TrackCollections" is="emby-checkbox" />
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="ResumeThresholdSeconds">Resume threshold (seconds)</label>
+                <input type="number" id="ResumeThresholdSeconds" is="emby-input" min="0" />
+                <div class="fieldDescription">Only store progress after this many seconds watched.</div>
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="CompletedPercent">Completed threshold (%)</label>
+                <input type="number" id="CompletedPercent" is="emby-input" min="1" max="100" />
+                <div class="fieldDescription">If progress >= this %, advance to the next item.</div>
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="CollectionOrdering">Collection ordering</label>
+                <select id="CollectionOrdering" is="emby-select">
+                    <option value="0">ReleaseDate</option>
+                    <option value="1">PremiereDate</option>
+                    <option value="2">SortName</option>
+                    <option value="3">ProductionYear</option>
+                </select>
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel" for="DebugLogging">Debug logging</label>
+                <input type="checkbox" id="DebugLogging" is="emby-checkbox" />
+            </div>
+
+            <button is="emby-button" type="submit" class="raised button-submit block">
+                Save
+            </button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            var pluginId = "f5c1f45c-6f5a-4b25-8b1f-4d5c60d9a2c6";
+
+            function loadConfig() {
+                Dashboard.getPluginConfiguration(pluginId).then(function (config) {
+                    document.querySelector('#Enabled').checked = config.Enabled;
+                    document.querySelector('#TrackPlaylists').checked = config.TrackPlaylists;
+                    document.querySelector('#TrackCollections').checked = config.TrackCollections;
+                    document.querySelector('#ResumeThresholdSeconds').value = config.ResumeThresholdSeconds;
+                    document.querySelector('#CompletedPercent').value = config.CompletedPercent;
+                    document.querySelector('#CollectionOrdering').value = config.CollectionOrdering;
+                    document.querySelector('#DebugLogging').checked = config.DebugLogging;
+                });
+            }
+
+            document.querySelector('#PlaylistNextUpConfigForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                Dashboard.getPluginConfiguration(pluginId).then(function (config) {
+                    config.Enabled = document.querySelector('#Enabled').checked;
+                    config.TrackPlaylists = document.querySelector('#TrackPlaylists').checked;
+                    config.TrackCollections = document.querySelector('#TrackCollections').checked;
+                    config.ResumeThresholdSeconds = parseInt(document.querySelector('#ResumeThresholdSeconds').value || "0", 10);
+                    config.CompletedPercent = parseInt(document.querySelector('#CompletedPercent').value || "92", 10);
+                    config.CollectionOrdering = parseInt(document.querySelector('#CollectionOrdering').value || "0", 10);
+                    config.DebugLogging = document.querySelector('#DebugLogging').checked;
+
+                    Dashboard.updatePluginConfiguration(pluginId, config).then(function () {
+                        Dashboard.processPluginConfigurationUpdateResult();
+                    });
+                });
+            });
+
+            loadConfig();
+        })();
+    </script>
+</body>
+</html>

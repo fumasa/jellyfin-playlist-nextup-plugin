@@ -1,0 +1,12 @@
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.csproj.AssemblyReference.cache
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.GeneratedMSBuildEditorConfig.editorconfig
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.csproj.CoreCompileInputs.cache
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.deps.json
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.dll
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.pdb
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/bin/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.xml
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.dll
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/refint/Jellyfin.Plugin.PlaylistNextUp.dll
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.xml
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/Jellyfin.Plugin.PlaylistNextUp.pdb
+/home/fumas/sources/jellyfin-playlist-nextup/Jellyfin.Plugin.PlaylistNextUp/obj/Release/net8.0/ref/Jellyfin.Plugin.PlaylistNextUp.dll
