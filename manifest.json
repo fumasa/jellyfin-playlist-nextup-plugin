@@ -1,11 +1,12 @@
 [
   {
-    "guid": "f5c1f45c-6f5a-4b25-8b1f-4d5c60d9a2c6",
+    "guid": "F5C1F45C-6F5A-4B25-8B1F-4D5C60D9A2C6",
     "name": "Playlist/Collection Next Up",
     "overview": "Resume/NextUp-like behavior for mixed playlists and collections.",
     "description": "Tracks playback progress for playlists and collections and exposes a resume feed.",
     "owner": "fumasa",
     "category": "General",
+    "imageUrl": "https://raw.githubusercontent.com/fumasa/jellyfin-playlist-nextup-plugin/main/images/logo.svg",
     "versions": [
       {
         "version": "0.1.2.0",

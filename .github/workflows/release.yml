@@ -71,7 +71,7 @@ jobs:
           with open("manifest.json", "r", encoding="utf-8") as f:
             manifest = json.load(f)
 
-          guid = "f5c1f45c-6f5a-4b25-8b1f-4d5c60d9a2c6"
+          guid = "F5C1F45C-6F5A-4B25-8B1F-4D5C60D9A2C6"
           plugin = next((p for p in manifest if p.get("guid") == guid), None)
           if plugin is None:
             raise SystemExit("Plugin GUID not found in manifest.json")
