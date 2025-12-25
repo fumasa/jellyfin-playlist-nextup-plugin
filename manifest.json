@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/fumasa/jellyfin-playlist-nextup-plugin/main/images/logo.svg",
     "versions": [
       {
+        "version": "0.1.10.0",
+        "changelog": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/tag/v0.1.10",
+        "targetAbi": "10.10.0",
+        "sourceUrl": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/download/v0.1.10/Jellyfin.Plugin.PlaylistNextUp_v0.1.10.zip",
+        "checksum": "FE9AA0E93B4953D89A8A4300E7981C36",
+        "timestamp": "2025-12-25"
+      },
+      {
         "version": "0.1.9.0",
         "changelog": "https://github.com/fumasa/jellyfin-playlist-nextup-plugin/releases/tag/v0.1.9",
         "targetAbi": "10.10.0",
